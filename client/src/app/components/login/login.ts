@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IUser } from '../../interfaces/iuser';
 import { AuthService } from '../../services/auth-service/auth-service';
@@ -13,6 +13,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class Login {
   useraData: IUser = { username: "", password: "" }
+  failed: WritableSignal<boolean> = signal(false)
+  errorMessage: WritableSignal<string> = signal("test")
 
   constructor(
     private authService: AuthService,
@@ -26,8 +28,13 @@ export class Login {
         this.router.navigate([""])
       },
       error: (err: HttpErrorResponse) => {
-        console.log(err)
-        alert("no CORS (((")
+        if (400 <= err.status && err.status < 500){
+          this.errorMessage.set("Ошибка авторизации")
+        } else {
+          this.errorMessage.set("Произошла неизвестная ошибка")
+        }
+
+        this.failed.set(true)
       }
     })
   }

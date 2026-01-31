@@ -15,3 +15,11 @@
     <button type="submit" (click)="logIn()"
         class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Submit</button>
 </form>
+
+@if (failed()){
+   <div class="flex items-center justify-center h-24 rounded-base bg-neutral-secondary-soft mt-10">
+      <p class="text-fg-disabled">
+         {{errorMessage()}}
+      </p>
+   </div>
+}

@@ -8,7 +8,7 @@ import { IAuthResponse } from '../../interfaces/iauth-response';
   providedIn: 'root',
 })
 export class AuthService {
-  private endpointURL = "http://localhost:8000/api/news"
+  private endpointURL = "http://localhost:8000/api/auth/login"
   private tokenSubject = new BehaviorSubject<string|null>(null)
   token$ = this.tokenSubject.asObservable()
 
