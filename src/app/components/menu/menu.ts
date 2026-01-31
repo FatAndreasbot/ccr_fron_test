@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth-service/auth-service';
 
 @Component({
   selector: 'app-menu',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './menu.html',
   styleUrl: './menu.css',
 })
