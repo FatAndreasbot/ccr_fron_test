@@ -7,7 +7,7 @@ import { INewsArticle } from '../../interfaces/inews-article';
   providedIn: 'root',
 })
 export class NewsService {
-private endpointURL = "http://localhost:8000/api/news"
+  private endpointURL = "http://localhost:8000/api/news"
 
   constructor(
     private http:HttpClient
