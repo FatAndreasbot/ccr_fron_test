@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { RouterLink } from "@angular/router";
+import { AuthService } from '../../services/auth-service/auth-service';
 
 @Component({
   selector: 'app-menu',
@@ -8,4 +10,11 @@ import { Component } from '@angular/core';
 })
 export class Menu {
 
+  constructor(
+    private authService: AuthService
+  ) { }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn()
+  }
 }
