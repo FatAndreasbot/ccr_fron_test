@@ -1,4 +1,15 @@
-<div class="grid  md:grid-cols-3 sm:grid-cols-2 gap-4 mb-4">
+<div [class]="gridClasses()">
+   @if (hasErrors()){
+   <div class="min-h-[100dv] rounded-base bg-neutral-secondary-soft">
+    
+      <h1 class="flex text-center justify-center text-shadow-fg-disabled items-start text-2xl p-2 ">
+        Произошла ошибка
+      </h1>
+      <p class="flex text-body text-center justify-center  p-2">
+        {{errorMessage}}
+      </p>
+   </div>
+   }
    @for (article of articles(); track article){
     <app-article [articleData]="article"/>
    }
