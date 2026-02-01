@@ -80,7 +80,7 @@ def post_task():
 
 
 @app.get("/api/position/")
-def put_task(user: Annotated[User, Depends(get_current_user)]):
+def get_positions(user: Annotated[User, Depends(get_current_user)]):
     with sqlite3.connect("tasks.db") as con:
         sql = "select name, latitude, longitude from positions"
         con.row_factory = dict_factory
@@ -92,14 +92,16 @@ def put_task(user: Annotated[User, Depends(get_current_user)]):
     return [Position(**r) for r in res]
 
 
-# @app.delete("/")
-# def delete_task(user: Annotated[User, Depends(get_current_user)], task_id: int):
-#     with sqlite3.connect("tasks.db") as con:
-#         sql = f"""
-#             delete from tasks where id={task_id}
-#         """
-#         cur = con.cursor()
-#         cur.execute(sql)
-#         con.commit()
+@app.post("/api/position/")
+def save_position(user: Annotated[User, Depends(get_current_user)], new_position:Position):
+    with sqlite3.connect("tasks.db") as con:
+        sql = f'''
+            INSERT INTO positions (name,latitude,longitude)
+                VALUES ('{new_position.name}',{new_position.latitude},{new_position.longitude});
+        '''
 
-#     return {"msg": "task deleted"}
+        cur = con.cursor()
+        cur.execute(sql)
+        con.commit()
+    
+    return {"msg", "ok"}, 200
