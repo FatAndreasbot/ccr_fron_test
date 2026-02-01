@@ -20,7 +20,7 @@ export class InteractiveMap implements AfterViewInit {
     this.positionService.getAllPoints().subscribe((positions) => {
       positions.forEach((pos, i, arr) => {
         L.marker([pos.latitude, pos.longitude])
-          .bindPopup(`<p>${pos.name}</p>`)
+          .bindTooltip(pos.name, {permanent:false})
           .addTo(this.map)
       })
     })
